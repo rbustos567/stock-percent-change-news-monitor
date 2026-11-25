@@ -5,8 +5,8 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 ENV_FILE="${SCRIPT_DIR}/.env"
 WATCHLIST_CONFIG="${SCRIPT_DIR}/watchlist.json"
 LOG_DIR="${SCRIPT_DIR}/logs"
-LOG_FILE="${LOG_DIR}/stocks_news_trigger.log"
-LOCK_FILE="/tmp/stocks_news_trigger_$(printf '%s' "$SCRIPT_DIR" | md5sum | awk '{print $1}').lock"
+LOG_FILE="${LOG_DIR}/stocks_pct_news_trigger.log"
+LOCK_FILE="/tmp/stocks_pct_news_trigger_$(printf '%s' "$SCRIPT_DIR" | md5sum | awk '{print $1}').lock"
 LOG_MAX_AGE_DAYS=7
 PYTHON_BIN="/usr/bin/python3"
 
@@ -38,7 +38,7 @@ find "$LOG_DIR" -type f -name '*.log*' ! -path "$LOG_FILE" -mtime +"$LOG_MAX_AGE
 done
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting stocks_news_trigger.py" >> "$LOG_FILE"
-"$PYTHON_BIN" "${SCRIPT_DIR}/stocks_news_trigger.py" \
+"$PYTHON_BIN" "${SCRIPT_DIR}/stocks_pct_news_trigger.py" \
   --env-file "$ENV_FILE" \
   --watchlist-config "$WATCHLIST_CONFIG" \
   --send-email >> "$LOG_FILE" 2>&1
