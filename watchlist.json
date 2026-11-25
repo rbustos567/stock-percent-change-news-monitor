@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "min_gain_pct": 3.0,
+    "min_loss_pct": 3.0,
+    "max_age_hours": 24,
+    "max_news": 3
+  },
+  "tickers": [
+    {
+      "symbol": "NVDA",
+      "min_gain_pct": 3.0,
+      "min_loss_pct": 3.0
+    },
+    {
+      "symbol": "ORCL",
+      "min_gain_pct": 3.0,
+      "min_loss_pct": 3.0
+    },
+    {
+      "symbol": "AVGO",
+      "min_gain_pct": 3.0,
+      "min_loss_pct": 3.0
+    },
+    {
+      "symbol": "MU",
+      "min_gain_pct": 3.0,
+      "min_loss_pct": 3.0
+    }
+  ]
+}
