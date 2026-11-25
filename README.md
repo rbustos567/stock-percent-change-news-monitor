@@ -51,6 +51,42 @@ Define default and per-ticker percentage thresholds (min_gain_pct, min_loss_pct)
 ```bash
    chmod +x run_stocks_pct_news_trigger.sh
 ```
+## Configuration (watchlist.json)
+The monitor reads ticker symbols and percentage thresholds from watchlist.json:
+```bash
+{
+  "defaults": {
+    "min_gain_pct": 3.0,
+    "min_loss_pct": 3.0,
+    "max_age_hours": 24,
+    "max_news": 3
+  },
+  "tickers": [
+    {
+      "symbol": "NVDA",
+      "min_gain_pct": 3.0,
+      "min_loss_pct": 3.0
+    },
+    {
+      "symbol": "ORCL",
+      "min_gain_pct": 3.0,
+      "min_loss_pct": 3.0
+    }
+  ]
+}
+```
+### Fields Reference
+
+- **defaults (object, optional):** Fallback settings applied to any ticker entry that omits its own values
+- **tickers (list, required):** List of equity objects to monitor:
+  - **symbol (string, required):** Stock ticker symbol (e.g., NVDA, ORCL, AVGO, MU).
+  - **min_gain_pct (float or null, optional):** Positive percentage gain threshold required to trigger an alert (e.g., 3.0 triggers at >= +3.0%). Set to null to disable gain alerts for that ticker.
+  - **min_loss_pct (float or null, optional):** Percentage drop magnitude required to trigger an alert (e.g., 3.0 triggers at <= -3.0%). Set to null to disable loss alerts for that ticker.
+  - **max_age_hours (int, optional):** Lookback window in hours for filtering recent news articles (defaults to 24).
+  - **max_news (int, optional):** Maximum number of news articles fetched per triggered ticker (defaults to 3).
+ 
+**Tip:** If a ticker uses the exact same thresholds defined in defaults, you can omit min_gain_pct and min_loss_pct and specify only {"symbol": "AVGO"}.
+
 ## Usage
 
 ### Run directly with Python
